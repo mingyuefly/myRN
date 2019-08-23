@@ -1,8 +1,17 @@
 import React from 'react';
 import { View, Text, Button} from 'react-native';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
+//import console = require('console');
 
 class HomeScreen extends React.Component {
+  componentDidMount() {
+    console.log('HomeScreen componentDidMount');
+  }
+
+  componentWillUnmount() {
+    console.log('HomeScreen componentWillUnmount');
+  }
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -15,6 +24,13 @@ class HomeScreen extends React.Component {
 
 // 从DetailsScreen继续进入DetailsScreen页面，如果使用navigate啥也不会做，因为此时已经在Details这个路由上了，如果要继续添加这个页面，则需要是用push方法
 class DetailsScreen extends React.Component {
+  componentDidMount() {
+    console.log('DetailsScreen componentDidMount');
+  }
+
+  componentWillUnmount() {
+    console.log('DetailsScreen componentWillUnmount');
+  }
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -33,6 +49,13 @@ const HomeStack = createStackNavigator(
 );
 
 class SettingsScreen extends React.Component {
+  componentDidMount() {
+    console.log('SettingsScreen componentDidMount');
+  }
+
+  componentWillUnmount() {
+    console.log('SettingsScreen componentWillUnmount');
+  }
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -45,6 +68,13 @@ class SettingsScreen extends React.Component {
 
 // 从DetailsScreen继续进入DetailsScreen页面，如果使用navigate啥也不会做，因为此时已经在Details这个路由上了，如果要继续添加这个页面，则需要是用push方法
 class ProfileScreen extends React.Component {
+  componentDidMount() {
+    console.log('ProfileScreen componentDidMount');
+  }
+
+  componentWillUnmount() {
+    console.log('ProfileScreen componentWillUnmount');
+  }
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
