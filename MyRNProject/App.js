@@ -4,98 +4,45 @@ import { createStackNavigator, createAppContainer, createBottomTabNavigator } fr
 //import console = require('console');
 
 class HomeScreen extends React.Component {
-  componentDidMount() {
-    console.log('HomeScreen componentDidMount');
-  }
-
-  componentWillUnmount() {
-    console.log('HomeScreen componentWillUnmount');
-  }
-
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
-        <Button title = 'Go to Details' onPress = {()=>this.props.navigation.navigate('Details')} />
+        <Button title = 'Go to Details' onPress = {()=>this.props.navigation.navigate('Details', {itemId:86, otherParam:'anything you want here'})} />
       </View>
     );
   }
 }
 
-// 从DetailsScreen继续进入DetailsScreen页面，如果使用navigate啥也不会做，因为此时已经在Details这个路由上了，如果要继续添加这个页面，则需要是用push方法
 class DetailsScreen extends React.Component {
-  componentDidMount() {
-    console.log('DetailsScreen componentDidMount');
-  }
-
-  componentWillUnmount() {
-    console.log('DetailsScreen componentWillUnmount');
-  }
   render() {
+    const {navigation} = this.props;
+    const itemId = navigation.getParam('itemId', 'NO-ID');
+    const otherParam = navigation.getParam('otherParam', 'some default value');
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Details Screen</Text>
-        <Button title = 'Go to Details...again' onPress = {()=>this.props.navigation.push('Details')} />
+        <Text>ItemId:{JSON.stringify(itemId)}</Text>
+        <Text>otherParam:{JSON.stringify(otherParam)}</Text>
+        <Button title = 'Go to Details...again' onPress = {()=>this.props.navigation.push('Details', {itemId:Math.floor(Math.random() * 100)})} />
+        <Button title = 'Go to home' onPress = {() => this.props.navigation.navigate('Home')} />
+        <Button title = 'Go back' onPress = {() => this.props.navigation.goBack()} />
       </View>
     );
   }
 }
 
-const HomeStack = createStackNavigator(
+const RootStack = createStackNavigator(
   {
     Home: HomeScreen,
     Details: DetailsScreen,
+  },
+  {
+    initialRouteName:'Home',
   }
 );
 
-class SettingsScreen extends React.Component {
-  componentDidMount() {
-    console.log('SettingsScreen componentDidMount');
-  }
-
-  componentWillUnmount() {
-    console.log('SettingsScreen componentWillUnmount');
-  }
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Setting Screen</Text>
-        <Button title = 'Go to Profile' onPress = {()=>this.props.navigation.navigate('Profile')} />
-      </View>
-    );
-  }
-}
-
-// 从DetailsScreen继续进入DetailsScreen页面，如果使用navigate啥也不会做，因为此时已经在Details这个路由上了，如果要继续添加这个页面，则需要是用push方法
-class ProfileScreen extends React.Component {
-  componentDidMount() {
-    console.log('ProfileScreen componentDidMount');
-  }
-
-  componentWillUnmount() {
-    console.log('ProfileScreen componentWillUnmount');
-  }
-  render() {
-    return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Profile Screen</Text>
-        <Button title = 'Go to Profile...again' onPress = {()=>this.props.navigation.push('Profile')} />
-      </View>
-    );
-  }
-}
-
-const SettingsStack = createStackNavigator({
-  Settings:SettingsScreen,
-  Profile:ProfileScreen,
-});
-
-const TabNavigator = createBottomTabNavigator({
-  Home:HomeStack,
-  Settings:SettingsStack,
-});
-
-const AppContainer = createAppContainer(TabNavigator);
+const AppContainer = createAppContainer(RootStack);
 
 export default class App extends React.Component {
   render() {
