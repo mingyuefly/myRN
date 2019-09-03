@@ -6,13 +6,6 @@ import { createStackNavigator, createAppContainer, createBottomTabNavigator } fr
 class HomeScreen extends React.Component {
   static navigationOptions = {
     title:'Home',
-    headerStyle:{
-      backgroundColor:'#f45113',
-    },
-    headerTintColor:'#fff',
-    headerTitleStyle:{
-      fontWeight:'bold'
-    },
   };
   render() {
     return (
@@ -55,6 +48,13 @@ const RootStack = createStackNavigator(
   },
   {
     initialRouteName:'Home',
+    defaultNavigationOptions:{
+      headerStyle:{
+        backgroundColor:'#f4511e',
+      },
+      headerTintColor:'#ffffff',
+      headerTitleStyle:'bold',
+    }
   }
 );
 
