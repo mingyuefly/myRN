@@ -1,12 +1,23 @@
 import React from 'react';
-import { View, Text, Button} from 'react-native';
+import { View, Text, Button, Image} from 'react-native';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 //import console = require('console');
 //import console = require('console');
 
+class LogoTitle extends React.Component {
+  render() {
+    return (
+      <Image 
+        source = {require('./spiro.png')}
+        style = {{width:30, height:30}}
+      />
+    );
+  }
+}
+
 class HomeScreen extends React.Component {
   static navigationOptions = {
-    title:'Home',
+    headerTitle:<LogoTitle />,
   };
   render() {
     return (
