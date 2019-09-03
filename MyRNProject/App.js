@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, Button} from 'react-native';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
 //import console = require('console');
+//import console = require('console');
 
 class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -18,9 +19,14 @@ class HomeScreen extends React.Component {
 }
 
 class DetailsScreen extends React.Component {
-  static navigationOptions = ({navigation}) => {
+  static navigationOptions = ({navigation, navigationOptions}) => {
+    //console.log(navigationOptions);
     return {
       title:navigation.getParam('otherParam', 'A Nested Details Screen'),
+      headerStyle:{
+        backgroundColor:navigationOptions.headerTintColor,
+      },
+      headerTintColor:navigationOptions.headerStyle.backgroundColor,
     };
   };
   render() {
