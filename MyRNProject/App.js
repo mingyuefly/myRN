@@ -46,8 +46,8 @@ class HomeScreen extends React.Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
-        <Text>{this.state.count}</Text>
-        <Button title = 'Go to Details' onPress = {()=>this.props.navigation.navigate('Details', {itemId:86, otherParam:'anything you want here'})} />
+        <Text>Count:{this.state.count}</Text>
+        <Button title = 'Go to Details' onPress = {()=>this.props.navigation.navigate('Details', {itemId:86, otherParam:'First Details',})} />
       </View>
     );
   }
