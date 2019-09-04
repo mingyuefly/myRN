@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Button, Image} from 'react-native';
+import { View, Text, Button, Image, Platform} from 'react-native';
 import { createStackNavigator, createAppContainer, createBottomTabNavigator } from 'react-navigation';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 //import console = require('console');
 //import console = require('console');
 
@@ -16,20 +17,36 @@ class LogoTitle extends React.Component {
 }
 
 class HomeScreen extends React.Component {
-  static navigationOptions = {
-    headerTitle:<LogoTitle />,
-    headerRight:(
-      <Button 
-        onPress = {() => alert('This is a button')}
-        title = 'Info'
-        color = '#fff'
-      />
-    ),
+  static navigationOptions = ({navigation}) => {
+    return {
+      headerTitle:<LogoTitle />,
+      headerRight:(
+        <Button 
+          onPress = {navigation.getParam('increaseCount')}
+          title = '+1'
+          color = {Platform.OS === 'ios'?'#fff':null}
+        />
+      ),
+    };
   };
+
+  componentWillMount() {
+    this.props.navigation.setParams({increaseCount:this._increaseCount});
+  }
+
+  state = {
+    count:0,
+  };
+
+  _increaseCount = () => {
+    this.setState({count:this.state.count + 1});
+  }
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Home Screen</Text>
+        <Text>{this.state.count}</Text>
         <Button title = 'Go to Details' onPress = {()=>this.props.navigation.navigate('Details', {itemId:86, otherParam:'anything you want here'})} />
       </View>
     );
